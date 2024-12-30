@@ -20,6 +20,7 @@ import axios from 'axios';
 import config from './config.cjs';
 import pkg from './lib/autoreact.cjs';
 const { emojis, doReact } = pkg;
+import { fileURLToPath } from 'url';
 
 const sessionName = "session";
 const app = express();
@@ -36,9 +37,16 @@ const logger = MAIN_LOGGER.child({});
 logger.level = "trace";
 
 const msgRetryCounterCache = new NodeCache();
-
-const __filename = new URL(import.meta.url).pathname;
+const __filename = fileURLToPath(import.meta.url);
+// const __filename = new URL(import.meta.url).pathname;
+// Get the directory of the current file
 const __dirname = path.dirname(__filename);
+
+// Log to verify the directory path
+console.log('Base directory:', __dirname);
+// const __dirname = path.dirname(__filename);
+console.log('Base directory:', __dirname);
+
 
 const sessionDir = path.join(__dirname, 'session');
 const credsPath = path.join(sessionDir, 'creds.json');

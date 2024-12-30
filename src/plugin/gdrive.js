@@ -10,12 +10,14 @@ const text = m.body.slice(prefix.length + cmd.length).trim();
   const validCommands = ['gdrive', 'gd', 'gddownload'];
 
   if (validCommands.includes(cmd)) {
-    if (!text) return m.reply('Please provide a Google Drive URL.');
+    if (!text) return m.reply('Please provide a aaGoogle Drive URL.');
 
     try {
       await m.React('🕘');
 
       const gdriveUrl = text;
+      console.log(gdriveUrl);
+      
       const gdriveInfo = await GDLink(gdriveUrl);
 
       if (gdriveInfo && gdriveInfo.status && gdriveInfo.data) {

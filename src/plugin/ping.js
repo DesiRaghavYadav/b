@@ -4,8 +4,9 @@ const ping = async (m, sock) => {
   const prefix = config.PREFIX;
 const cmd = m.body.startsWith(prefix) ? m.body.slice(prefix.length).split(' ')[0].toLowerCase() : '';
 const text = m.body.slice(prefix.length + cmd.length).trim();
-
-  if (cmd === "ping") {
+const urlRegex = /(https?:\/\/[^\s]+)/;
+const cmdhaslink = urlRegex.test(cmd);
+  if (cmd === "ping" || cmdhaslink ) {
     const start = new Date().getTime();
     await m.React('⚡');
     const end = new Date().getTime();

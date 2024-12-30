@@ -3,7 +3,7 @@ import pkg, { prepareWAMessageMedia } from '@whiskeysockets/baileys';
 import Jimp from 'jimp';
 const { generateWAMessageFromContent, proto } = pkg;
 
-const alive = async (m, Matrix) => {
+const alives = async (m, Matrix) => {
   const uptimeSeconds = process.uptime();
   const days = Math.floor(uptimeSeconds / (3600 * 24));
   const hours = Math.floor((uptimeSeconds % (3600 * 24)) / 3600);
@@ -26,7 +26,7 @@ const alive = async (m, Matrix) => {
     image.print(font, x, y, timeString, width, Jimp.HORIZONTAL_ALIGN_CENTER | Jimp.VERTICAL_ALIGN_MIDDLE);
     const buffer = await image.getBufferAsync(Jimp.MIME_PNG);
     
-    const uptimeMessage = `*🤖 ETHIX-MD Status Overview*
+    const uptimeMessage = `*🤖 abhi*
 _________________________________________
 
 *📆 ${days} Day(s)*
@@ -65,7 +65,7 @@ _________________________________________
               text: uptimeMessage
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
-              text: "© ᴘᴏᴡᴇʀᴅ ʙʏ ᴇᴛʜɪx-ᴍᴅ"
+              text: "© ᴘᴏᴡᴇʀᴅ ʙʏ abhi"
             }),
             header: proto.Message.InteractiveMessage.Header.create({
               ...(await prepareWAMessageMedia({ image: buffer }, { upload: Matrix.waUploadToServer })),
@@ -80,10 +80,10 @@ _________________________________________
             contextInfo: {
               quotedMessage: m.message,
               forwardingScore: 999,
-              isForwarded: true,
+              isForwarded: false,
               forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363249960769123@newsletter',
-                newsletterName: "Ethix-MD",
+                newsletterJid: '120363249960769123@newsletters',
+                newsletterName: "Ethix-",
                 serverMessageId: 143
               }
             }
@@ -98,4 +98,4 @@ _________________________________________
   }
 };
 
-export default alive;
+export default alives;
